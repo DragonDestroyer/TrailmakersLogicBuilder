@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trailmakers Logic Editor</title>
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+  <header>
+    <h1>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      Trailmakers Logic Editor
+      <span class="badge">2D Blueprint</span>
+    </h1>
+    <div class="complexity-badge" title="Complexity ≈ number of logic gates used (game definition)">
+      Complexity: <strong id="complexity-val">0</strong>
+    </div>
+    <div class="toolbar">
+      <button id="btn-clear" title="Clear entire blueprint">Clear</button>
+      <button id="btn-delete" class="danger" title="Delete selected (Del)">Delete</button>
+      <button id="btn-run" class="primary" title="Run simulation">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        Run
+      </button>
+      <button id="btn-stop" style="display:none" title="Stop simulation">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg>
+        Stop
+      </button>
+    </div>
+  </header>
+
+  <div class="main">
+    <!-- Left palette (resizable) -->
+    <aside class="palette" id="palette-panel" style="width:230px">
+      <div class="palette-header">Block Palette — Drag to canvas</div>
+      <div class="palette-scroll" id="palette"></div>
+    </aside>
+    <div class="resizer" id="resizer-left" data-side="left" title="Drag to resize"></div>
+
+    <!-- Canvas -->
+    <div class="canvas-wrap" id="canvas-wrap">
+      <div id="world" class="world">
+        <svg id="wires"></svg>
+        <div id="canvas"></div>
+      </div>
+      <div class="empty-hint" id="empty-hint">
+        <h2>Empty Blueprint</h2>
+        <p>Drag logic blocks from the left palette onto the grid</p>
+      </div>
+      <div class="help">
+        <strong>Controls</strong><br>
+        • Drag blocks from palette<br>
+        • Click <span style="color:#3dff9a">OUT</span> then <span style="color:#5a8ab8">IN</span> to wire<br>
+        • Multiple wires per port allowed<br>
+        • <strong>Left-drag empty grid</strong> = pan canvas<br>
+        • Select + Delete / Del key<br>
+        • Drag panel edges to resize
+      </div>
+      <div class="pan-hint">Pan: hold left mouse on empty grid</div>
+    </div>
+
+    <div class="resizer" id="resizer-right" data-side="right" title="Drag to resize"></div>
+    <!-- Right panel (resizable) -->
+    <aside class="side-panel" id="side-panel" style="width:300px">
+      <div class="panel-header">
+        <span id="panel-title">Properties</span>
+      </div>
+      <div class="panel-body" id="panel-body">
+        <p style="color:var(--text-dim);font-size:0.8rem">Select a block or press Run to control sensors.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Debug console -->
+  <div class="debug-console">
+    <div class="debug-header">
+      <span>Debug Console</span>
+      <button id="btn-clear-debug">Clear log</button>
+    </div>
+    <div id="debug-log"></div>
+  </div>
+
+  <div class="status">
+    <span id="status-text">Ready — 0 blocks</span>
+    <span id="status-mode">Edit mode</span>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="editor.js"></script>
+</body>
+</html>
