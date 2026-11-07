@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #07131c;
+  --color-canvas: #081018;
+  --color-surface: #0e1c28;
+  --color-raised: #143044;
+  --color-line: #23445c;
+  --color-fg: #e7f2ff;
+  --color-muted: #8aa4b8;
+  --color-primary: #ff7a1a;
+  --color-signal: #3ec6ff;
+  --color-pos: #3ddc97;
+  --color-neg: #ff5d73;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Rajdhani", "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Sans", ui-monospace, monospace;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+  input[type="range"] {
+    accent-color: var(--color-primary);
+    width: 100%;
+  }
+}
+
+.bg-canvas {
+  background-color: var(--color-canvas);
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-signal) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-signal) 10%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
